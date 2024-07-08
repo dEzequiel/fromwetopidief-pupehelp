@@ -1,11 +1,20 @@
 {
   "name": "fromwetopidief-pupehelp",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "node --test"
   },
   "author": "Ezequiel De La Rosa",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "express": "^4.19.2",
+    "playwright": "^1.45.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.1",
+    "@types/node": "^20.14.10"
+  }
 }
