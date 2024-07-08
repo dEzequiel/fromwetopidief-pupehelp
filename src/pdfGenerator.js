@@ -17,7 +17,14 @@ export default async function generatePdfWithPlaywright({url}) {
     const page = await browser.newPage();
     await page.goto(url);
     await page.emulateMedia({ media: 'screen' });
-
+    
+    await page.addStyleTag({
+        content: `
+            header, footer {
+                display: none !important;
+            }
+        `
+    });
     const pathToSavePdf = normalize(pdfsFolders + '/' + getDomainName(url) + '.pdf');
     const pdf = await page.pdf({ path: pathToSavePdf, format: 'A4', printBackground: true});
     
