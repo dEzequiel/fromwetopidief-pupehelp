@@ -1,0 +1,11 @@
+{
+  "name": "fromwetopidief-pupehelp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "author": "Ezequiel De La Rosa",
+  "license": "ISC",
+  "description": ""
+}
