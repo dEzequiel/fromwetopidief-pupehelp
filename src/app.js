@@ -1,12 +1,13 @@
 import express from 'express';
-import generatePdf from './utils/generatePdf.js';
+import generatePdfWithPlaywright from './pdfGenerator.js';
+
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 
 app.use("/generate-pdf", async (req, res) => {
-    const pdfBuffer = await generatePdf({url: req.body.url});
+    const pdfBuffer = await generatePdfWithPlaywright({url: req.body.url});
     res.status(200)
     .set({
       "Access-Control-Allow-Origin": "*",
