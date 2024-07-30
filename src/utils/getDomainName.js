@@ -1,4 +1,4 @@
-export function getDomainName(url) {
+export default function getDomainName(url) {
     const urlO = new URL(url);
     let domain = urlO.hostname;
 

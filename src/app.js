@@ -1,24 +1,23 @@
 import express from 'express';
-import generatePdfWithPlaywright from './pdfGenerator.js';
-import cors from 'cors';
+import generatePdf from './generatePdf.js';
+import getTripNameFromUrl from './utils/getTripName.js';
+import checkYourttooDomain from './middlewares/checkYourttooDomain.js';
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(checkYourttooDomain)
 
-// CORS Middleware
-app.use(cors({
-  origin: '*',
-  credentials: true
-}));
-
-app.post('/generate-pdf', async (req, res) => {
+app.post('/pdf', async (req, res) => {
     try {
-        const pdfBuffer = await generatePdfWithPlaywright({ url: req.body.url });
+        const pdfBuffer = await generatePdf(req.body.programUrl);
         res.status(200)
            .set({
-              "Content-Type": "application/pdf"
+              "Content-Type": "application/pdf",
+              "Content-Disposition": `attachment; filename=${getTripNameFromUrl(req.body.programUrl)}_itinerario.pdf`
            })
            .end(pdfBuffer);
     } catch (error) {
@@ -32,5 +31,9 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`PDFGenerator Service running on port ${port}`);
 });
+
+// app.listen(port, () => {
+//     console.log(`Example app listening on port ${port}`);
+// });
